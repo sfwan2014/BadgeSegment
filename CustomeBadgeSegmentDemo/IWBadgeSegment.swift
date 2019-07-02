@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import Foundation
 
 class IWBadgeSegment: UIControl {
 
@@ -49,7 +49,7 @@ class IWBadgeSegment: UIControl {
             self.setNeedsDisplay()
         }
     }
-    var normalTitleColor: UIColor = UIColor.init(red: 51/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1) {
+    var normalTitleColor: UIColor = UIColor.init(red: 254/255.0, green: 51/255.0, blue: 51/255.0, alpha: 1) {
         didSet{
             self.setNeedsDisplay()
         }
@@ -68,6 +68,7 @@ class IWBadgeSegment: UIControl {
         }
     }
     var segmentTitles: [String]? {
+        
         didSet {
             badges = [Int].init(repeating: 0, count: segmentTitles?.count ?? 0)
             self.setNeedsDisplay()
@@ -77,6 +78,7 @@ class IWBadgeSegment: UIControl {
     convenience init(frame: CGRect, segmentTitles: [String]!) {
         self.init(frame: frame)
         self.segmentTitles = segmentTitles
+        badges = [Int].init(repeating: 0, count: segmentTitles?.count ?? 0)
         self._init()
     }
     
@@ -84,13 +86,10 @@ class IWBadgeSegment: UIControl {
     override func awakeFromNib() {
         super.awakeFromNib()
         self._init()
-        
-//        self.backgroundColor = UIColor.yellow
     }
     
     private func _init(){
-        self.layer.cornerRadius = cornerRadius
-        self.layer.masksToBounds = true
+        self.backgroundColor = UIColor.clear
         self.tintColor = self.normalTitleColor
         
     }
@@ -136,7 +135,7 @@ class IWBadgeSegment: UIControl {
                 self.drawText(title, rect: frame, context: context, isSelected: false)
             }
             
-            self.draw(badge: badges![index], rect: frame, context: context)
+            self.draw(badge: badges?[index] ?? 0, rect: frame, context: context)
             
         }
         
@@ -258,7 +257,6 @@ class IWBadgeSegment: UIControl {
     
     private func drawText(_ text: String?, rect: CGRect!, context: CGContext, isSelected: Bool){
         context.saveGState()
-        
         var textColor = UIColor.white
         if isSelected {
             context.setStrokeColor(self.selectedTitleColor.cgColor)
@@ -268,23 +266,22 @@ class IWBadgeSegment: UIControl {
             textColor = self.normalTitleColor
         }
         
-        context.setFont(titleFont.cgFontRef()!)
-        
         var nsStr = NSString.init(string: text!)
-        var textSize = nsStr.size(withAttributes: [NSAttributedStringKey.font : self.titleFont])
+        let originStr = nsStr
+        var textSize = nsStr.size(withAttributes: [NSAttributedString.Key.font : self.titleFont])
         
         while textSize.width > itemWidth {
             nsStr = nsStr.substring(to: nsStr.length - 1) as NSString
             let tmpStr = NSString.init(format: "%@...", nsStr)
-            textSize = tmpStr.size(withAttributes: [NSAttributedStringKey.font : self.titleFont])
+            textSize = tmpStr.size(withAttributes: [NSAttributedString.Key.font : self.titleFont])
         }
-        if nsStr.length < text?.length ?? 0 {
+        if nsStr.length < originStr.length {
             nsStr = NSString.init(format: "%@...", nsStr)
         }
         
         let point = CGPoint.init(x: rect.origin.x+(itemWidth - textSize.width)/2.0, y: rect.origin.y + (rect.size.height - textSize.height)/2.0)
         
-        nsStr.draw(at: point, withAttributes: [NSAttributedStringKey.foregroundColor : textColor, NSAttributedStringKey.font: self.titleFont])
+        nsStr.draw(at: point, withAttributes: [NSAttributedString.Key.foregroundColor : textColor, NSAttributedString.Key.font: self.titleFont])
         
 //        nsStr.draw(in: rect, withAttributes: [NSAttributedStringKey.foregroundColor : textColor, NSAttributedStringKey.font: self.titleFont])
         
@@ -315,22 +312,23 @@ class IWBadgeSegment: UIControl {
         var font = self.badgeFont
         if badge > 99 {
             badgeStr = "..."
-            font = UIFont.init(name: pingFangMedium, size: 8)!
+            font = UIFont.init(name: self.badgeFont.fontName, size: 8)!
         }
-        let textSize = badgeStr.size(withAttributes: [NSAttributedStringKey.font : self.badgeFont])
+        let textSize = badgeStr.size(withAttributes: [NSAttributedString.Key.font : self.badgeFont])
         let point = CGPoint.init(x: center.x - (textSize.width)/2.0, y: center.y - ( textSize.height)/2.0)
         
-        badgeStr.draw(at: point, withAttributes: [NSAttributedStringKey.foregroundColor : UIColor.white, NSAttributedStringKey.font: font])
+        badgeStr.draw(at: point, withAttributes: [NSAttributedString.Key.foregroundColor : UIColor.white, NSAttributedString.Key.font: font])
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.randomElement()
         let point = touch?.location(in: self)
         
-        let index = Int(point!.x) / Int(itemWidth)
+        let width = self.frame.size.width/CGFloat(segmentTitles?.count ?? 1)
+        let index = Int(point!.x) / Int(width)
         self.currentIndex = index
         
-        self.sendActions(for: UIControlEvents.valueChanged)
+        self.sendActions(for: UIControl.Event.valueChanged)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {

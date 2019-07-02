@@ -14,6 +14,7 @@
 		8E2BCB9422CB04F3003CBC1A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E2BCB9222CB04F3003CBC1A /* LaunchScreen.storyboard */; };
 		8E2BCB9F22CB04F3003CBC1A /* CustomeBadgeSegmentDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BCB9E22CB04F3003CBC1A /* CustomeBadgeSegmentDemoTests.swift */; };
 		8E2BCBAA22CB04F3003CBC1A /* CustomeBadgeSegmentDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BCBA922CB04F3003CBC1A /* CustomeBadgeSegmentDemoUITests.swift */; };
+		8E2BCBB822CB0508003CBC1A /* IWBadgeSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BCBB722CB0508003CBC1A /* IWBadgeSegment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		8E2BCBA522CB04F3003CBC1A /* CustomeBadgeSegmentDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomeBadgeSegmentDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E2BCBA922CB04F3003CBC1A /* CustomeBadgeSegmentDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomeBadgeSegmentDemoUITests.swift; sourceTree = "<group>"; };
 		8E2BCBAB22CB04F3003CBC1A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8E2BCBB722CB0508003CBC1A /* IWBadgeSegment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IWBadgeSegment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				8E2BCB8922CB04F1003CBC1A /* AppDelegate.swift */,
 				8E2BCB8B22CB04F1003CBC1A /* ViewController.swift */,
+				8E2BCBB722CB0508003CBC1A /* IWBadgeSegment.swift */,
 				8E2BCB8D22CB04F1003CBC1A /* Main.storyboard */,
 				8E2BCB9022CB04F3003CBC1A /* Assets.xcassets */,
 				8E2BCB9222CB04F3003CBC1A /* LaunchScreen.storyboard */,
@@ -258,6 +261,7 @@
 			files = (
 				8E2BCB8C22CB04F1003CBC1A /* ViewController.swift in Sources */,
 				8E2BCB8A22CB04F1003CBC1A /* AppDelegate.swift in Sources */,
+				8E2BCBB822CB0508003CBC1A /* IWBadgeSegment.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +438,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = CustomeBadgeSegmentDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -451,6 +456,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = CustomeBadgeSegmentDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
