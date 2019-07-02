@@ -21,5 +21,5 @@ segment1.addTarget(self, action: #selector(segmentAction), for: UIControl.Event.
 
 **截图**
 <p align="center">
-<img src="https://github.com/sfwan2014/BadgeSegment/example.png" alt="Kingfisher" title="Kingfisher" width="260"/>
+<img src="https://github.com/sfwan2014/BadgeSegment/CustomeBadgeSegmentDemo/example.png" alt="Kingfisher" title="Kingfisher" width="260"/>
 </p>
