@@ -16,8 +16,8 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let segment = IWBadgeSegment.init(frame: CGRect.init(x: 16, y: 50, width: UIScreen.main.bounds.size.width-16*2, height: 44), segmentTitles: ["西瓜","冬瓜","南瓜","北瓜"])
-        segment.badges?[1] = 8
+        let segment = IWBadgeSegment.init(frame: CGRect.init(x: 16, y: 50, width: UIScreen.main.bounds.size.width-16*2, height: 44), segmentTitles: ["西瓜"])
+        segment.badges?[0] = 8
         self.view.addSubview(segment)
         segment.addTarget(self, action: #selector(segmentAction), for: UIControl.Event.valueChanged)
         

@@ -326,6 +326,9 @@ class IWBadgeSegment: UIControl {
         
         let width = self.frame.size.width/CGFloat(segmentTitles?.count ?? 1)
         let index = Int(point!.x) / Int(width)
+        if index == currentIndex {
+            return
+        }
         self.currentIndex = index
         
         self.sendActions(for: UIControl.Event.valueChanged)
